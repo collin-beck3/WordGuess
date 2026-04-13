@@ -12,6 +12,7 @@ package com.github.zipcodewilmington;
 // the user types "quit" to exit the game. 
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -72,19 +73,20 @@ class Hangman {
         return maxAttempts - wrongGuesses;
     }
 }
-// Phase 2: Enhance the game to include a predefined word (e.g., "soccer") and display the word with underscores for 
-// unguessed letters. The user should be able to guess letters,
-// and the game should display the current state of the word after each guess. The game should end when the user guesses 
-// the word correctly or runs out of attempts. 
 
 public class WordGuess {
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.println("Welcome to the Word Guess Game!");
+
+            String[] words = {"soccer", "zipcode", "voltage", "tennis", "hockey", "queen", "programming" };
+            Random random = new Random();
             boolean keepPlaying = true;
 
             while (keepPlaying) {
-                Hangman game = new Hangman("soccer");
+                String randomWord = words[random.nextInt(words.length)];
+                Hangman game = new Hangman(randomWord);
+
                 System.out.println("\nNew game! Guess the word!");
                 System.out.println(game.displayWord());
 
