@@ -72,6 +72,16 @@ class Hangman {
     public int getAttemptsLeft() {
         return maxAttempts - wrongGuesses;
     }
+
+    public Set<Character> getGuessedLetters() {
+        Set<Character> guessedLetters = new HashSet<>();
+        for (char c : this.guessedLetters) { 
+            if (word.indexOf(c) == -1) {
+                guessedLetters.add(c);
+            }
+        }
+        return guessedLetters;
+    }
 }
 
 public class WordGuess {
@@ -110,6 +120,10 @@ public class WordGuess {
                     System.out.println(correct ? "Great guess! " : "Wrong! ");
                     System.out.println(game.displayWord());
 
+                    if (!game.getGuessedLetters().isEmpty()) {
+                        System.out.println("Wrong guesses: " + game.getGuessedLetters());
+                    }
+
                     if (game.isWordGuessed()) {
                         System.out.println(" You guessed the word!");
                         break;
@@ -118,6 +132,7 @@ public class WordGuess {
                         System.out.println("Game over! The word was: " + game.getSecretWord());
                         break;
                     }
+
                 }
 
                 if (keepPlaying) {
